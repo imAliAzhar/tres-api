@@ -23,6 +23,12 @@ impl Record {
     }
 }
 
+impl Default for Record {
+    fn default() -> Self {
+        Record::new()
+    }
+}
+
 pub struct RecordMc {}
 
 impl RecordMc {

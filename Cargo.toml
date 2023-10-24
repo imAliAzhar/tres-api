@@ -1,21 +1,22 @@
 [package]
-name = "tres-api"
+name = "tres_api"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-axum = { version = "0.6.20", features = ["macros"] }
 chrono = { version = "0.4.31", features = ["serde"] }
-getset = "0.1.2"
+dotenv = "0.15.0"
+http = "0.2.9"
 serde = { version = "1.0.189", features = ["derive"] }
 serde_json = "1.0.107"
-shuttle-aws-rds = { version = "0.29.0", features = ["postgres"] }
-shuttle-axum = "0.29.0"
-shuttle-runtime = "0.29.0"
-shuttle-secrets = "0.29.0"
 sqlx = { version = "0.7.2", features = ["postgres", "runtime-tokio", "chrono"] }
 tokio = "1.28.2"
+vercel_runtime = "1.1.0"
 
 [dev-dependencies]
 anyhow = "1.0.75"
 httpc-test = "0.1.7"
+
+[[bin]]
+name = "test"
+path = "api/records.rs"
