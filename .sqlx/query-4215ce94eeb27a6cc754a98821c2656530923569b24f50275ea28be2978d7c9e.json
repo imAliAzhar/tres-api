@@ -1,0 +1,14 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n            insert into records(date)\n            select * from unnest($1::timestamptz[])\n        ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "TimestamptzArray"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "4215ce94eeb27a6cc754a98821c2656530923569b24f50275ea28be2978d7c9e"
+}
