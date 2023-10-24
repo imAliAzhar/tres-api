@@ -6,7 +6,7 @@ use sqlx::FromRow;
 
 use super::ModelManager;
 
-#[derive(FromRow, Serialize)]
+#[derive(Debug, FromRow, Serialize)]
 pub struct Record {
     date: DateTime<Utc>,
     duration_str: Option<String>,
@@ -19,6 +19,16 @@ impl Record {
             date: Utc::now(),
             duration_ms: None,
             duration_str: None,
+        }
+    }
+}
+
+impl From<DateTime<Utc>> for Record {
+    fn from(date: DateTime<Utc>) -> Self {
+        Self {
+            date,
+            duration_str: None,
+            duration_ms: None,
         }
     }
 }
@@ -76,5 +86,25 @@ impl RecordMc {
         .await?;
 
         Ok(result)
+    }
+
+    pub async fn insert_many(mm: &ModelManager, records: &[Record]) -> Result<u64> {
+        let db = mm.db();
+        let dates = records
+            .iter()
+            .map(|r| r.date)
+            .collect::<Vec<DateTime<Utc>>>();
+
+        let result = sqlx::query!(
+            r#"
+            insert into records(date)
+            select * from unnest($1::timestamptz[])
+        "#,
+            &dates
+        )
+        .execute(db)
+        .await?;
+
+        Ok(result.rows_affected())
     }
 }

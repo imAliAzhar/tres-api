@@ -1,4 +1,4 @@
-#![allow(dead_code)]
+#![allow(dead_code, unused)]
 use anyhow::Result;
 use serde_json::json;
 use std::fs;
@@ -16,11 +16,13 @@ type Db = Pool<Postgres>;
 async fn dev() -> Result<()> {
     // init_dev_db().await.unwrap();
 
-    let hc = httpc_test::new_client("http://127.0.0.1:8000/api")?;
+    // let hc = httpc_test::new_client("http://localhost:3000/api")?;
 
-    hc.do_post("/records", json!({})).await?.print().await?;
+    // hc.do_post("/records", json!({})).await?.print().await?;
 
-    hc.do_get("/records").await?.print().await?;
+    // hc.do_get("/records").await?.print().await?;
+
+    // hc.do_post("/seed", json!({})).await?.print().await?;
 
     Ok(())
 }

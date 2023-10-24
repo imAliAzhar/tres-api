@@ -4,13 +4,16 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+async-recursion = "1.0.5"
 chrono = { version = "0.4.31", features = ["serde"] }
 dotenv = "0.15.0"
 http = "0.2.9"
+reqwest = { version = "0.11.22", features = ["json"] }
 serde = { version = "1.0.189", features = ["derive"] }
 serde_json = "1.0.107"
 sqlx = { version = "0.7.2", features = ["postgres", "runtime-tokio", "chrono", "tls-native-tls"] }
 tokio = "1.28.2"
+url = "2.4.1"
 vercel_runtime = "1.1.0"
 
 [dev-dependencies]
@@ -18,5 +21,9 @@ anyhow = "1.0.75"
 httpc-test = "0.1.7"
 
 [[bin]]
-name = "test"
+name = "records"
 path = "api/records.rs"
+
+[[bin]]
+name = "seed"
+path = "api/seed.rs"

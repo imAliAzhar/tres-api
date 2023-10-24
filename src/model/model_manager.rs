@@ -1,8 +1,7 @@
 pub type Db = sqlx::PgPool;
 
-use std::env;
+use crate::config::config;
 
-use dotenv::dotenv;
 use sqlx::postgres::PgPoolOptions;
 
 #[derive(Clone)]
@@ -12,13 +11,11 @@ pub struct ModelManager {
 
 impl ModelManager {
     pub async fn new() -> Self {
-        dotenv().ok();
-
         Self {
             db: PgPoolOptions::new()
-                .connect(&env::var("DATABASE_URL").unwrap())
+                .connect(&config().DATABASE_URL)
                 .await
-                .unwrap(),
+                .expect("ERROR: Cannot connect to database"),
         }
     }
 
