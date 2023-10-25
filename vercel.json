@@ -1,7 +1,6 @@
 {
-  "outputDirectory": "public",
   "functions": {
-    "api/**/*.rs": {
+    "api/main.rs": {
       "runtime": "vercel-rust@4.0.6"
     }
   }

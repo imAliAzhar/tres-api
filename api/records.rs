@@ -1,11 +1,6 @@
 use http::Method;
 use tres_api::model::ModelManager;
-use vercel_runtime::{run, Body, Error, Request, Response};
-
-#[tokio::main]
-async fn main() -> Result<(), Error> {
-    run(handler).await
-}
+use vercel_runtime::{Body, Error, Request, Response};
 
 pub async fn handler(req: Request) -> Result<Response<Body>, Error> {
     let mm = ModelManager::new().await;
